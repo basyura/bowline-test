@@ -1,0 +1,32 @@
+
+<< メソッドが変更されているので直す >>
+
+bowline-0.9.3/lib/bowline/initializer.rb
+    def set_autoload_paths
+      ActiveSupport::Dependencies.load_paths      = configuration.autoload_paths.uniq
+      ActiveSupport::Dependencies.load_once_paths = configuration.autoload_once_paths.uniq
+    end
+    ↓
+    def set_autoload_paths
+      ActiveSupport::Dependencies.load_paths      = configuration.autoload_paths.uniq
+      ActiveSupport::Dependencies.load_once_paths = configuration.autoload_once_paths.uniq
+    end
+
+<< コンソールへのログ出力 >>
+  Bowline.log(users);
+
+<< デバッグログの出力 @index.html >>
+Bowline.trace = true;
+
+
+<< 処理概要 >>
+script/run
+	+ config/boot
+	|   + vendor/gems/environment.rb
+	|   |   + vendor/gems/ruby/1.9.1/environment.rb
+	|   + bowline
+    + bowline/commands/run
+        + bowline/tasks/bowline
+        + Rake::Task['libs:setup'].invoke
+        + Bowline::Library.desktop_path Bowline.root
+
