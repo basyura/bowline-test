@@ -1,7 +1,13 @@
+<< 手順 >>
 
-<< メソッドが変更されているので直す >>
+  $ git clone git://github.com/basyura/bowline-test.git
+  $ cd bowline-test
+  $ bowline-bundle
 
-bowline-0.9.3/lib/bowline/initializer.rb
+  メソッドが変更されているので直す
+
+    vendor/gems/ruby/1.9.1/gems/bowline-0.9.3/lib/bowline/initializer.rb
+
     def set_autoload_paths
       ActiveSupport::Dependencies.load_paths      = configuration.autoload_paths.uniq
       ActiveSupport::Dependencies.load_once_paths = configuration.autoload_once_paths.uniq
@@ -12,15 +18,49 @@ bowline-0.9.3/lib/bowline/initializer.rb
       ActiveSupport::Dependencies.load_once_paths = configuration.autoload_once_paths.uniq
     end
 
+  $ ruby script/run
+
+<< 初期データ >>
+
+  config/initializers/tweets.rb
+
+  tweet = Tweet.new
+  tweet.body = "Hello World" 
+  tweet.save
+ 
+<< model 連携 >>
+
+  index.html
+    Bowline.invoke("TweetsBinder", "sing" , "aaaa");
+    Bowline.invoke("TweetsBinder", "sing" , ["aaaa" , "bbb" , "cccc"]);
+    Bowline.invoke("TweetsBinder", "sing" , {a:"A" , b:"B" , c:"C"});
+
+  tweets_binder.rb
+    class TweetsBinder < Bowline::Binders::Collection
+      bind Tweet
+      class << self
+        def initial
+          #[{:body => "Hello Tweet"}]
+          klass.all
+        end
+        def sing(param)
+          tweet = Tweet.new
+          tweet.body = "sing #{param.class}" + param.to_s
+          tweet.save
+        end
+      end
+    end
+
+
 << コンソールへのログ出力 >>
   Bowline.log(users);
 
 << デバッグログの出力 @index.html >>
-Bowline.trace = true;
+  Bowline.trace = true;
 
 
 << 処理概要 >>
-script/run
+  script/run
 	+ config/boot
 	|   + vendor/gems/environment.rb
 	|   |   + vendor/gems/ruby/1.9.1/environment.rb

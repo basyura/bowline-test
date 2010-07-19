@@ -21,16 +21,11 @@
 		var tweets = $('#tweets');
 		tweets.bowlineChain('TweetsBinder');
 		$('#tweet').click(function() {
-			//tweets.invoke("sing" , "aaaaaaa");
-			//return false;
+			Bowline.invoke("TweetsBinder", "sing" , "aaaa");
+			Bowline.invoke("TweetsBinder", "sing" , ["aaaa" , "bbb" , "cccc"]);
 			Bowline.invoke("TweetsBinder", "sing" , {a:"A" , b:"B" , c:"C"});
 		});
     });
-	function sing() {
-		//Bowline.invoke("TweetsBinder", "sing" , "aaaa");
-		//Bowline.invoke("TweetsBinder", "sing" , ["aaaa" , "bbb" , "cccc"]);
-		Bowline.invoke("TweetsBinder", "sing" , {a:"A" , b:"B" , c:"C"});
-	}
   </script>
 </head>
 <body>
