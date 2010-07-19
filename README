@@ -1,8 +1,22 @@
 << 手順 >>
 
-  $ git clone git://github.com/basyura/bowline-test.git
-  $ cd bowline-test
-  $ bowline-bundle
+  ruby のバージョン
+
+    $ ruby -v
+      ruby 1.9.1p378 (2010-01-10 revision 26273) [i386-darwin10.4.0]
+
+  bowline の最新版をインストール
+
+    $ git clone git://github.com/maccman/bowline.git
+    $ cd bowline
+    $ gem build hoge.gemspec
+    $ gem install -l foo.gem
+
+  テストリポジトリ作成
+
+    $ git clone git://github.com/basyura/bowline-test.git
+    $ cd bowline-test
+    $ bowline-bundle
 
   メソッドが変更されているので直す
 
@@ -18,7 +32,9 @@
       ActiveSupport::Dependencies.load_once_paths = configuration.autoload_once_paths.uniq
     end
 
-  $ ruby script/run
+  起動
+
+    $ ruby script/run
 
 << 初期データ >>
 
