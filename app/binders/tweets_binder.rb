@@ -9,6 +9,15 @@ class TweetsBinder < Bowline::Binders::Collection
       tweet = Tweet.new
       tweet.body = "sing #{param.class}" + param.to_s
       tweet.save
+
+      if  param.kind_of? String
+        callback "success to tweet with string"
+      elsif param.kind_of? Array
+        callback ["success" , "to" , "tweet" , "with" , "array"]
+      elsif param.kind_of? Hash
+        ret = {:msg => "success to tweet with hash" , :name => "bowline"}
+        callback ret
+      end
     end
   end
 end

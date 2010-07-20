@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Hello</title>
-  <link rel="stylesheet" href="stylesheets/application.css" type="text/css" charset="utf-8">
-	<script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
-	<script src="javascripts/jquery.chain.js" type="text/javascript" charset="utf-8"></script>
-  <script src="javascripts/superclass.js" type="text/javascript" charset="utf-8"></script>
-  <script src="javascripts/bowline.js" type="text/javascript" charset="utf-8"></script>
-  <script src="javascripts/bowline.chain.js" type="text/javascript" charset="utf-8"></script>
-  <script src="javascripts/application.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" charset="utf-8">
-    // Binder Example:
-	Bowline.trace = true;
-    jQuery(function($){
-		/*
-		$('#tweets').bowlineChain('TweetsBinder');
-		$('#tweet').click(sing);
-		*/
-		var tweets = $('#tweets');
-		tweets.bowlineChain('TweetsBinder');
-		$('#tweet').click(function() {
-			Bowline.invoke("TweetsBinder", "sing" , "aaaa");
-			Bowline.invoke("TweetsBinder", "sing" , ["aaaa" , "bbb" , "cccc"]);
-			Bowline.invoke("TweetsBinder", "sing" , {a:"A" , b:"B" , c:"C"});
-		});
-    });
-  </script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Hello</title>
+<link rel="stylesheet" href="stylesheets/application.css" type="text/css" charset="utf-8">
+<script src="javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="javascripts/jquery.chain.js" type="text/javascript" charset="utf-8"></script>
+<script src="javascripts/superclass.js" type="text/javascript" charset="utf-8"></script>
+<script src="javascripts/bowline.js" type="text/javascript" charset="utf-8"></script>
+<script src="javascripts/bowline.chain.js" type="text/javascript" charset="utf-8"></script>
+<script src="javascripts/application.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+// Binder Example:
+Bowline.trace = true;
+jQuery(function($){
+	/*
+	$('#tweets').bowlineChain('TweetsBinder');
+	$('#tweet').click(sing);
+	*/
+	var tweets = $('#tweets');
+	tweets.bowlineChain('TweetsBinder');
+	$('#tweet').click(function() {
+		Bowline.invoke("TweetsBinder", "sing" , "aaaa" , 
+			function(res){alert(res)});
+		Bowline.invoke("TweetsBinder", "sing" , ["aaaa" , "bbb" , "cccc"] ,
+			function(res){alert(res)});
+		Bowline.invoke("TweetsBinder", "sing" , {a:"A" , b:"B" , c:"C"} , 
+			function(res){alert(res.msg + " " + res.name)});
+	});
+});
+</script>
 </head>
 <body>
 	<div id="tweets">
 		<div class="item">
 			<span class="body"></span>
+			<span class="msg"></span>
 		</div>
 	</div>
 	<input type="button" value="tweet" id="tweet" >
