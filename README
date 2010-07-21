@@ -19,6 +19,7 @@
     $ bowline-bundle
 
   メソッドが変更されているので直す
+  ※ support for older version of activesupport (107383c6c375d61035ce) で対応済み
 
     vendor/gems/ruby/1.9.1/gems/bowline-0.9.3/lib/bowline/initializer.rb
 
